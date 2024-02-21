@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Customer } from 'src/app/model/customer';
+import { ICustomer } from 'src/app/model/customer';
 
 @Component({
   selector: 'app-add-customer',
@@ -8,46 +8,46 @@ import { Customer } from 'src/app/model/customer';
   styleUrls: ['./add-customer.component.css']
 })
 export class AddCustomerComponent {
-  customerForm!: FormGroup;
+  customerForm: any=FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.customerForm = this.formBuilder.group({
-      customerNumber: [""],
-      shortName: [""],
-      individual: [""],
-      nationality: [""],
-      nationalityNumber: [""],
-      nationalityDescription: [""],
-      streetAddress: [""],
-      addressLine2: [""],
-      addressLine3: [""],
-      townCountry: [""],
-      postCode: [""],
-      country: [""],
-      countryCode: [""],
-      countryCodeNumber: [""],
-      dispatchCode: [""],
-      communicationChannel: [""],
-      phoneNumber: [""],
-      officePhoneNumber: [""],
-      faxNumber: [""],
-      mobileOperatorISO: [""],
-      mobileOperatorCode: [""],
-      smsNumber: [""],
-      email: [""],
+      CUSTOMER_NUMBER: ['', Validators.required],
+      SHORT_NAME: ['', Validators.required],
+      IS_INDIVIDUAL: ['', Validators.required],
+      NATIONALITY: ['', Validators.required],
+      NATIONALITY_NUMBER: ['', Validators.required],
+      NATIONALITY_DESCRIPTION: ['', Validators.required],
+      STREET_ADDRESS: ['', Validators.required],
+      ADDRESS_LINE2: [[]],
+      ADDRESS_LINE3: [[]],
+      TOWN_COUNTRY: ['', Validators.required],
+      POST_CODE: [[]],
+      COUNTRY: ['', Validators.required],
+      COUNTRY_CODE: ['', Validators.required],
+      COUNTRY_CODE_NUMBER: ['', Validators.required],
+      DISPATCH_CODE: ['', Validators.required],
+      COMMUNICATION_CHANNEL: ['', Validators.required],
+      PHONE_NUMBER: ['', Validators.required],
+      OFFICE_PHONE_NUMBER: ['', Validators.required],
+      FAX_NUMBER: ['', Validators.required],
+      MOBILE_OPERATORISO: ['', Validators.required],
+      MOBILE_OPERATOR_CODE: ['', Validators.required],
+      SMS_NUMBER: ['', Validators.required],
+      EMAIL: ['', [Validators.required, Validators.email]]
     });
   }
 
   addCustomers() {
     console.log('Form validity:', this.customerForm.valid);
-     console.log("Customer form values:", this.customerForm.value);
+    
     // If form is invalid, log errors for each form control
     if (this.customerForm.invalid) {
       Object.keys(this.customerForm.controls).forEach(controlName => {
         const control = this.customerForm.get(controlName);
-        console.log(controlName, 'errors:', control?.errors);
+        console.log(controlName, 'errors:', control.errors);
       });
     }
   }

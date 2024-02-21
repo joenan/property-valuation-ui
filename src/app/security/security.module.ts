@@ -5,9 +5,7 @@ import { SignUpComponent } from "./sign-up/sign-up.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { RouterModule, Routes } from "@angular/router";
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AuthService } from "./auth.service";
-import { SharedModule } from "../shared/shared.module";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 export const securityRoutes: Routes = [
   {
@@ -28,9 +26,10 @@ export const securityRoutes: Routes = [
     ForgetPasswordComponent,
   ],
   imports: [
-    SharedModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(securityRoutes),
   ],
-  providers: [AuthService],
 })
 export class SecurityModule {}

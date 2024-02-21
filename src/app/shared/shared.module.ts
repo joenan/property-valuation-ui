@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ApiService } from './services/api.service';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
 
   imports: [
     CommonModule,
@@ -15,7 +15,9 @@ import { ApiService } from './services/api.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+  
   ],
+
 
   exports: [
     CommonModule,
@@ -23,17 +25,18 @@ import { ApiService } from './services/api.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+
   ],
 
   providers: [
     // { provide: MatDialogRef, useValue: {} },
-    ApiService,
-  ],
+  ]
 })
+
 export class SharedModule {
   static forRoot(): ModuleWithProviders<any> {
     return {
-      ngModule: SharedModule,
+      ngModule: SharedModule
     };
   }
 }
