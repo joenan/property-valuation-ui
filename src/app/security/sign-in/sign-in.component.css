@@ -1,0 +1,12 @@
+a{
+    cursor: pointer;
+}
+
+.w-50 {
+    width: 41%!important;
+}
+
+.flex-forgot{
+    display: flex;
+}
+

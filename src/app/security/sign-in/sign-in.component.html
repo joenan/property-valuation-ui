@@ -1,0 +1,169 @@
+<main>
+  <div class="container">
+    <section
+      class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+    >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div
+            class="col-lg-4 col-md-6 d-flex flex-column align-items-center w-50 justify-content-center"
+          >
+            <div class="d-flex justify-content-center py-4">
+              <a class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="" />
+                <span class="d-none d-lg-block"
+                  >Bank Property evaluation application</span
+                >
+              </a>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">
+                    Login to Your Account
+                  </h5>
+                  <p class="text-center small">
+                    Enter your username & password to login
+                  </p>
+                </div>
+                <form class="row g-3 needs-validation" [formGroup]="loginForm">
+                  <div class="col-12">
+                    <label for="yourUsername" class="form-label"
+                      >Username</label
+                    >
+                    <div class="input-group has-validation">
+                      <input
+                        type="text"
+                        name="username"
+                        class="form-control"
+                        id="yourUsername"
+                        formControlName="username"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Please enter your username.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label for="yourPassword" class="form-label"
+                      >Password</label
+                    >
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      id="yourPassword"
+                      formControlName="password"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Please enter your password!
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="remember"
+                        value="true"
+                        id="rememberMe"
+                      />
+                      <label class="form-check-label" for="rememberMe"
+                        >Remember me</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button
+                      class="btn btn-primary w-100"
+                      type="button"
+                      (click)="login()"
+                    >
+                      Login
+                    </button>
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0" [routerLink]="['sign-up']">
+                      Don't have account? <a>Create an account</a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- 
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form row g-3">
+        <div class="px-30 py-10 text-left">
+          <a class="link-effect font-w700" style="color: #df7829;">
+              <span class="font-size-xl font-size-lg">AVAD</span><span class="font-size-xl">School</span>
+          </a>
+          <h1 class="h3 font-w700 mt-30 mb-10">Welcome to Your Dashboard</h1>
+          <h2 class="h5 font-w400 text-muted mb-4">Please sign in</h2>
+      </div>
+        <div class="col-12 mb-2">
+          <label class="form-label">Username</label>
+          <input type="text" class="form-control form-control-lg" />
+        </div>
+        <div class="col-12 mb-2">
+          <label class="form-label">Password</label>
+          <input type="text" class="form-control form-control-lg" />
+        </div>
+        <div class="col-auto mb-1">
+          <div class="form-check">
+            <input
+              class="form-check-input mt-1 mx-auto"
+              type="checkbox"
+              id="autoSizingCheck"
+            />
+            <label class="form-check-label" for="autoSizingCheck">
+              Remember me
+            </label>
+          </div>
+        </div>
+
+        <div  class="form-btn col-2">
+          <button class="btn prim_btn clickable" (click)="login()">
+            <span>Login</span>
+          </button>
+        </div>
+
+        <div  style="margin-top: 1.5rem;" class="auth_content_extra">
+          <p  class="login"> Don’t have an account?
+            <span routerLink="/sign-up" class="text-primary-color body-1-bold clickable" tabindex="0">
+              Sign Up</span></p>
+        </div>
+
+
+      </form>
+
+      <div
+        class="login100-more details"
+        style="background-image: url('assets/images/bgauth.jpg')"
+      >
+        <div class="contan">
+          <h2
+            style="font-weight: 400; font-size: 50px; margin-top: 100px"
+            class="title"
+          >
+            Welcome to a World of Potentials!
+          </h2>
+          <p style="font-weight: 400; font-size: 20px">
+            Join over 500 parents who have depended on us to help their children
+            discover and develop their potentials at a very early age.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

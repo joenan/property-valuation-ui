@@ -1,0 +1,23 @@
+.form-label {
+  font-weight: 600;
+}
+
+.form-check-input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.form-check-input[type="checkbox"]:not(:checked) {
+  transform: scale(1.5);
+}
+
+.form-check-input[type="checkbox"]:checked {
+  transform: scale(1.5);
+}
+.mys-5 {
+  margin-bottom: 12px;
+  /* margin-left: 50px; */
+}
+.mys {
+  margin-left: 50px;
+}

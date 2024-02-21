@@ -1,0 +1,117 @@
+<!-- ****************************************************************************** -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <h5
+            class="card-title text-light mb-3"
+            style="background-color: #343a40; padding: 10px"
+          >
+            Borrower's Details
+          </h5>
+          <div class="card-body">
+            <form [formGroup]="dynamicForm">
+              <div formArrayName="borrowers">
+                <!-- Iterates over each borrower in the borrowers FormArray -->
+                <div
+                  *ngFor="let borrower of borrowers.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <!-- Display title for each borrower -->
+                  <h6 class="card-title">{{ getBorrowerTitle(i) }}</h6>
+                  <!-- Form fields for customer information -->
+                  <div class="row g-3">
+                    <div class="col-md-4">
+                      <!-- Customers number -->
+                      <div class="mb-3">
+                        <label class="form-label">Customer Number</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="customerNumber"
+                        />
+                      </div>
+                      <!-- Customers name -->
+                      <div class="mb-3">
+                        <label class="form-label">Customer Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="customerName"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <!-- Contact No -->
+                      <div class="mb-3">
+                        <label class="form-label">Contact No</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="contactNo"
+                        />
+                      </div>
+                      <!-- Email -->
+                      <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="email"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <!-- Address -->
+                      <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea
+                          class="form-control"
+                          style="height: 120px"
+                          formControlName="address"
+                        ></textarea>
+                      </div>
+                      <!-- Button to remove the borrower -->
+                      <div class="mb-3">
+                        <button
+                          class="btn btn-danger"
+                          *ngIf="i > 0"
+                          (click)="removeBorrower(i)"
+                        >
+                          <i class="bi bi-basket"></i> Remove Borrower
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Button to add a new borrower -->
+              <div class="text-end">
+                <button class="btn btn-primary mt-3" (click)="addBorrower()">
+                  Add Joint Borrower
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-start">
+    <button
+      class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
+      (click)="goToPrevious()"
+    >
+      Previous <i class="bi bi-arrow-left"></i>
+    </button>
+  </div>
+  <div class="text-end">
+    <button
+      class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
+      (click)="goToNext()"
+    >
+      Next <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</section>

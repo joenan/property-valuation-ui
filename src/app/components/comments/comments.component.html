@@ -1,0 +1,225 @@
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <h5
+          class="card-title text-light"
+          style="background-color: #343a40; padding: 10px"
+        >
+          Comment's Section
+        </h5>
+        <div class="card-body">
+          <!-- General Form Elements -->
+          <form>
+            <div class="row g-5">
+              <div class="col-md">
+                <div class="mb-3 mt-4">
+                  <label class="form-label">Comments</label>
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    placeholder="comments..."
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- End General Form Elements -->
+          <label class="form-label">Previous comments</label>
+
+          <!-- Small tables -->
+          <table class="table table-sm">
+            <caption>
+              List of users
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+
+                <th scope="col">User</th>
+
+                <th scope="col">Comments</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>2016-05-25 12:30</td>
+                <td>USER001</td>
+                <td>Brandon Jacob</td>
+              </tr>
+              <tr>
+                <td>2014-12-05 12:40</td>
+                <td>USER002</td>
+                <td>Bridie Kessler</td>
+              </tr>
+              <tr>
+                <td>2011-08-12 01:23</td>
+                <td>USER003</td>
+                <td>Ashleigh Langosh</td>
+              </tr>
+              <tr>
+                <td>2012-06-11 01:25</td>
+                <td>USER004</td>
+                <td>Angus Grady</td>
+              </tr>
+              <tr>
+                <td>2011-04-19 01:27</td>
+                <td>USER005</td>
+                <td>Raheem Lehner</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- End small tables -->
+        </div>
+      </div>
+      <!-- upload section -->
+      <div class="card">
+        <h5
+          class="card-title text-light mb-3"
+          style="background-color: #343a40; padding: 10px"
+        >
+          Upload section
+        </h5>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Upload section</h5> -->
+
+          <!-- General Form Elements -->
+          <form>
+            <div class="row g-5">
+              <div class="col-md-4">
+                <!-- Customers number -->
+                <div class="row">
+                  <div class="mb-3">
+                    <label class="form-label">Document type</label>
+                    <div class="col-sm-12">
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option selected>Open this select menu</option>
+                        <option value="1">New</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Contact No -->
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    (dragover)="onDragOver($event)"
+                    (drop)="onDrop($event)"
+                  >
+                    <label for="imageInput" class="image-upload">
+                      <input
+                        type="file"
+                        id="imageInput"
+                        class="d-none"
+                        (change)="onImageSelected($event)"
+                      />
+                      <div class="image-preview" *ngIf="!imageUrl">
+                        <i class="bi bi-cloud-upload"></i>
+                        <div class="upload-text">
+                          <div style="width: 180px">
+                            Drag and drop image to upload
+                            <p>or</p>
+                            <input
+                              type="file"
+                              id="fileElem"
+                              multiple
+                              accept="image/*"
+                              style="display: none"
+                            />
+                            <label class="browse-button">Browse</label>
+                            <p>Maximum size: 5mb</p>
+                            <p>Allowed format:XLSX, PDF</p>
+                          </div>
+                        </div>
+                      </div>
+                      <img
+                        *ngIf="imageUrl"
+                        [src]="imageUrl"
+                        class="img-fluid"
+                        alt="Uploaded Image"
+                      />
+                    </label>
+
+                    <div class="mt-2">
+                      <button
+                        *ngIf="imageUrl"
+                        class="btn btn-danger mt-2"
+                        (click)="clearImage()"
+                      >
+                        Clear Image
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <!-- Address -->
+                <div class="mb-3">
+                  <label class="form-label">Uploaded Documents</label>
+                  <div class="col-sm-12">
+                    <!-- Small tables -->
+                    <table class="table table-sm">
+                      <thead>
+                        <tr>
+                          <th scope="col">Doc Type</th>
+                          <th scope="col">Filename</th>
+                          <th scope="col">Size</th>
+                          <th scope="col">Uploaded By</th>
+                          <th scope="col">Uploaded On</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let document of documents">
+                          <td>{{ document.docType }}</td>
+                          <td>{{ document.filename }}</td>
+                          <td>{{ document.size }}</td>
+                          <td>{{ document.uploadedBy }}</td>
+                          <td>{{ document.uploadedOn }}</td>
+                          <td>
+                            <!-- Download icon -->
+                            <a>
+                              <i class="bi bi-cloud-download"></i>
+                            </a>
+                            <span style="margin: 0 5px"></span>
+                            <!-- Delete icon -->
+                            <a style="color: red">
+                              <i class="bi bi-trash"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <!-- End small tables -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- End General Form Elements -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-start">
+    <button
+      class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
+      (click)="goToPrevious()"
+    >
+      Previous <i class="bi bi-arrow-left"></i>
+    </button>
+  </div>
+  <div class="text-end">
+    <button
+      class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
+      (click)="goToNext()"
+    >
+      Next <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</section>

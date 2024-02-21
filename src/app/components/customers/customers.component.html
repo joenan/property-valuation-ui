@@ -1,0 +1,118 @@
+<!-- <div class="pagetitle">
+    <h1>Customer</h1>
+</div> -->
+
+<!-- <section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="datatable-top">
+            <div class="datatable-dropdown">
+              <h5 class="card-title">List of Customers</h5>
+            </div>
+            <div class="datatable-search">
+              <button
+                class="btn btn-primary"
+                routerLink="/app/customers/add-customer"
+              >
+                Add Customer
+              </button>
+            </div>
+          </div>
+
+     
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Customer Number</th>
+                  <th scope="col">Short Name</th>
+                  <th scope="col">Nationality</th>
+                  <th scope="col">Town/Country</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let customer of customers">
+                  <td>{{ customer.CUSTOMER_NUMBER }}</td>
+                  <td>{{ customer.SHORT_NAME }}</td>
+                  <td>{{ customer.NATIONALITY }}</td>
+                  <td>{{ customer.TOWN_COUNTRY }}</td>
+                  <td>{{ customer.PHONE_NUMBER }}</td>
+                  <td>{{ customer.EMAIL }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- ******************************************************************* -->
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h5 class="card-title">Manage Customers</h5>
+              <a class="btn btn-primary" href="/app/customers/add-customer"
+                >Add Customer</a
+              >
+            </div>
+
+            <!-- General Form Elements -->
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Customer Number</th>
+                    <th scope="col">Short Name</th>
+                    <th scope="col">Nationality</th>
+                    <th scope="col">Town/Country</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let customer of customers">
+                    <td>{{ customer.customerNumber }}</td>
+                    <td>{{ customer.shortName }}</td>
+                    <td>{{ customer.nationality }}</td>
+                    <td>{{ customer.townCountry }}</td>
+                    <td>{{ customer.phoneNumber }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>
+                      <a class="btn btn-sm">
+                        <i class="bi bi-eye"> </i> View
+                      </a>
+                      <!-- <button class="btn btn-dark btn-sm">
+                        <i class="bi bi-eye"></i> View
+                      </button> -->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-end">
+      <button
+        class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
+        (click)="goToNext()"
+      >
+        Next <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</section>

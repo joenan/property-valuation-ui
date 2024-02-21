@@ -1,0 +1,257 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 ">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Customer Information Form</h5>
+          <div class="col-xl-12">
+            <!-- Bordered Tabs -->
+            <ul class="nav nav-tabs nav-tabs-bordered">
+              <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Personal
+                  Information</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Address
+                  Information</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Contact
+                  Information</button>
+              </li>
+            </ul>
+            <form [formGroup]="customerForm">
+              <div class="tab-content pt-2">
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                  <fieldset class="mt-3">
+                    <div class="row g-5">
+                      <div class="col-md">
+                        <div class="mb-3">
+                          <label for="customerNumber" class="form-label">Customer Number</label>
+                          <input type="text" class="form-control" id="customerNumber" formControlName="customerNumber">
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Short Name -->
+                        <div class="mb-3">
+                          <label for="shortName" class="form-label">Short Name</label>
+                          <input type="text" class="form-control" id="shortName" formControlName="shortName">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row g-5">
+                      <div class="col-md">
+                        <!-- Is Individual -->
+                        <div class="mb-3">
+                          <label for="isIndividual" class="form-label">Is Individual</label>
+                          <select class="form-select" id="isIndividual" formControlName="individual">
+                            <option [ngValue]="true">Yes</option>
+                            <option [ngValue]="false">No</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Nationality -->
+                        <div class="mb-3">
+                          <label for="nationality" class="form-label">Nationality</label>
+                          <input type="text" class="form-control" id="nationality" formControlName="nationality">
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Nationality Number -->
+                        <div class="mb-3">
+                          <label for="nationalityNumber" class="form-label">Nationality Number</label>
+                          <input type="text" class="form-control" id="nationalityNumber"
+                            formControlName="nationalityNumber">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Nationality Description -->
+                    <div class="mb-3">
+                      <label for="nationalityDescription" class="form-label">Nationality Description</label>
+                      <input type="text" class="form-control" id="nationalityDescription"
+                        formControlName="nationalityDescription">
+                    </div>
+                    <!-- Other personal information fields... -->
+                  </fieldset>
+
+                </div>
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                  <fieldset class="mt-3">
+                    <div class="row g-5">
+                      <div class="col-md">
+                        <div class="mb-3">
+                          <label for="streetAddress" class="form-label">Street Address</label>
+                          <input type="text" class="form-control" id="streetAddress" formControlName="streetAddress">
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Address Line 2 -->
+                        <div class="mb-3">
+                          <label for="addressLine2" class="form-label">Address Line 2</label>
+                          <input type="text" class="form-control" id="addressLine2" formControlName="addressLine2">
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                    <div class="row g-5">
+                      <div class="col-md">
+                        <!-- Address Line 3 -->
+                        <div class="mb-3">
+                          <label for="addressLine3" class="form-label">Address Line 3</label>
+                          <input type="text" class="form-control" id="addressLine3" formControlName="addressLine3">
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Town/Country -->
+                        <div class="mb-3">
+                          <label for="townCountry" class="form-label">Town/Country</label>
+                          <input type="text" class="form-control" id="townCountry" formControlName="townCountry">
+                        </div>
+                      </div>
+                      <div class="col-md">
+                        <!-- Post Code -->
+                        <div class="mb-3">
+                          <label for="postCode" class="form-label">Post Code</label>
+                          <input type="number" class="form-control" id="postCode" formControlName="postCode">
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="row g-5">
+                      <div class="col-md">
+                        <!-- Country -->
+                        <div class="mb-3">
+                          <label for="country" class="form-label">Country</label>
+                          <input type="text" class="form-control" id="country" formControlName="country">
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Country Code -->
+                        <div class="mb-3">
+                          <label for="countryCode" class="form-label">Country Code</label>
+                          <input type="text" class="form-control" id="countryCode" formControlName="countryCode">
+                        </div>
+                      </div>
+                      <div class="col-md">
+                        <!-- Country Code Number -->
+                        <div class="mb-3">
+                          <label for="countryCodeNumber" class="form-label">Country Code Number</label>
+                          <input type="text" class="form-control" id="countryCodeNumber"
+                            formControlName="countryCodeNumber">
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <!-- Dispatch Code -->
+                    <div class="mb-3">
+                      <label for="dispatchCode" class="form-label">Dispatch Code</label>
+                      <input type="text" class="form-control" id="dispatchCode" formControlName="dispatchCode">
+                    </div>
+                    <!-- Other address information fields... -->
+                  </fieldset>
+                </div>
+                <div class="tab-pane fade pt-3" id="profile-settings">
+                  <!-- Contact Information -->
+                  <fieldset class="mt-3">
+
+                    <div class="row g-5">
+                      <div class="col-md">
+                        <!-- Communication Channel -->
+                        <div class="mb-3">
+                          <label for="communicationChannel" class="form-label">Communication Channel</label>
+                          <input type="text" class="form-control" id="communicationChannel"
+                            formControlName="communicationChannel">
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <div class="mb-3">
+                          <label for="phoneNumber" class="form-label">Phone Number</label>
+                          <input type="text" class="form-control" id="officePhoneNumber" formControlName="phoneNumber">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row g-5">
+                      <div class="col-md">
+                        <!-- Communication Channel -->
+                        <div class="mb-3">
+                          <label for="officePhoneNumber" class="form-label">Office Phone Number</label>
+                          <input type="text" class="form-control" id="officePhoneNumber"
+                            formControlName="officePhoneNumber">
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Fax Number -->
+                        <div class="mb-3">
+                          <label for="faxNumber" class="form-label">Fax Number</label>
+                          <input type="text" class="form-control" id="faxNumber" formControlName="faxNumber">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row g-5">
+                      <div class="col-md">
+
+                        <!-- Mobile Operator ISO -->
+                        <div class="mb-3">
+                          <label for="mobileOperatorIso" class="form-label">Mobile Operator ISO</label>
+                          <input type="text" class="form-control" id="mobileOperatorIso"
+                            formControlName="mobileOperatorISO">
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Mobile Operator Code -->
+                        <div class="mb-3">
+                          <label for="mobileOperatorCode" class="form-label">Mobile Operator Code</label>
+                          <input type="text" class="form-control" id="mobileOperatorCode"
+                            formControlName="mobileOperatorCode">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row g-5">
+                      <div class="col-md">
+
+                         <!-- SMS Number -->
+                    <div class="mb-3">
+                      <label for="smsNumber" class="form-label">SMS Number</label>
+                      <input type="text" class="form-control" id="smsNumber" formControlName="smsNumber">
+                    </div>
+
+                      </div>
+
+                      <div class="col-md">
+                        <!-- Mobile Operator Code -->
+                        <div class="mb-3">
+                          <label for="email" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="email" formControlName="email">
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div><!-- End Tab Content -->
+              <!-- Submit Button -->
+              <button type="button" (click)="addCustomers()" class="btn btn-primary mt-3" [disabled]="customerForm.invalid">Submit</button>
+            </form><!-- End Form -->
+          </div><!-- End Col -->
+        </div><!-- End Card Body -->
+      </div><!-- End Card -->
+    </div><!-- End Column -->
+  </div><!-- End Row -->
+</div><!-- End Container -->
