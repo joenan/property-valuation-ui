@@ -1,29 +1,41 @@
-import { ClsService } from "./../services/cls.service";
 import { Injectable } from "@angular/core";
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HTTP_INTERCEPTORS,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { AuthService } from "../security/auth.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  auth_token =
-    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjaGlrZXppZTIyIiwiaWF0IjoxNzA4NDQxMzIyLCJleHAiOjE3MDg1Mjc3MjJ9.fSRCSyCutffR3GHjw-QReuVpdgJ2klUNhmxKWN9dt9gv-gAB6C7IdE9F_1mzHHQhrLKe-nTvkcbSO9B4jwqkZg";
-  constructor(private signupService: ClsService) {}
+
+  constructor(private _authService: AuthService) {}
 
   intercept(
-    request: HttpRequest<unknown>,
+    request: HttpRequest<any>,
     next: HttpHandler
-  ): Observable<HttpEvent<unknown>> {
-    const tokenRequest = request.clone({
-      setHeaders: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.auth_token}`,
-      },
-    });
-    return next.handle(tokenRequest);
+  ): Observable<HttpEvent<any>> {
+
+    let newRequest = request;
+    let token = this._authService.getToken;
+
+    if(token != null){
+      newRequest = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    }
+
+    return next.handle(newRequest);
   }
 }
+
+export const AuthInterceptorProvider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: AuthInterceptor,
+  multi: true,
+};

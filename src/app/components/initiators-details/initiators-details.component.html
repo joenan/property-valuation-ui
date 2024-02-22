@@ -1,264 +1,373 @@
 <section class="section">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <h5
-          class="card-title text-light mb-3"
-          style="background-color: #343a40; padding: 10px"
-        >
-          Initiator's Details
-        </h5>
+  <div class="container-fluid">
 
-        <div class="card-body">
-          <!-- <h5 class="card-title table-dark">Initiator's Details</h5> -->
-          <!-- <h5 class="card-title bg-dark text-light">Initiator's Details</h5> -->
-
-          <!-- General Form Elements -->
-          <form>
-            <div class="row g-5">
-              <div class="col-md">
-                <div class="mb-3">
-                  <label class="form-label">Initiator details</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="name@example.com"
-                  />
-                </div>
-              </div>
-              <div class="col-md">
-                <div class="mb-3">
-                  <label class="form-label">Initiator business unit</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="name@example.com"
-                  />
-                </div>
-              </div>
-              <div class="col-md">
-                <div class="mb-3">
-                  <label class="form-label">Initiator contact number</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="name@example.com"
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
-          <!-- End General Form Elements -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 0000000000000000000000000000000000000000000000000000000000000000000 -->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <h5
-          class="card-title text-light mb-3"
-          style="background-color: #343a40; padding: 10px"
-        >
-          Property Valuation
-        </h5>
-        <div class="card-body">
-          <!-- Property Valuation Form -->
-          <form>
-            <div class="row g-3">
-              <div class="col-md-4">
-                <fieldset class="mb-3">
-                  <label class="form-label">
-                    Choose Property Valuation Type:
-                  </label>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="gridRadios"
-                      id="fOSRef"
-                      value="option1"
-                    />
-                    <label class="form-check-label" for="fOSRef">FOS Ref</label>
+    <ng-container *ngIf="showPropertyFacilityForm">
+      <div class="row">
+        <div class="col-lg-12">
+  
+  
+  
+          <form [formGroup]="formData" ></form>
+          <div class="card">
+            <h5
+              class="card-title text-light mb-3"
+              style="background-color: #343a40; padding: 10px"
+            >
+              Initiator's Details
+            </h5>
+  
+            <div class="card-body">
+              <form>
+                <div class="row g-5">
+                  <div class="col-md">
+                    <div class="mb-3">
+                      <label class="form-label">Initiator details</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="name@example.com"
+                        [(ngModel)]="userDetails.name"
+                        name="name"
+                        disabled="true"
+                      />
+                    </div>
                   </div>
-                </fieldset>
-              </div>
-
-              <div class="col-md-4">
-                <div class="mb-3">
-                  <label class="form-label">Type of Valuation:</label>
-                  <select class="form-select">
-                    <option selected disabled>Select type</option>
-                    <option value="1">New Valuation</option>
-                  </select>
+                  <div class="col-md">
+                    <div class="mb-3">
+                      <label class="form-label">Initiator business unit</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="name@example.com"
+                        [(ngModel)]="userDetails.businessUnit"
+                        name="businessUnit"
+                        disabled="true"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="mb-3">
+                      <label class="form-label">Initiator contact number</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder="name@example.com"
+                        [(ngModel)]="userDetails.contactNumber"
+                        name="contactNumber"
+                       
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="mb-3">
-                  <label class="form-label">FOS Reference Number:</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter FOS Reference Number"
-                  />
-                </div>
-              </div>
+              </form>
+              <!-- End General Form Elements -->
             </div>
-
-            <!-- <div class="text-end">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div> -->
-          </form>
-          <!-- End Property Valuation Form -->
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- ********************************************************************* -->
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <h5
-          class="card-title text-light mb-3"
-          style="background-color: #343a40; padding: 10px"
-        >
-          Facility Details
-        </h5>
-        <div class="card-body">
-          <!-- <h5
-              class="card-title text-center mb-4"
-              style="color: #007bff; font-size: 1.5rem; font-weight: bold"
+     
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <h5
+              class="card-title text-light mb-3"
+              style="background-color: #343a40; padding: 10px"
+            >
+              Property Valuation
+            </h5>
+            <div class="card-body">
+              <!-- Property Valuation Form -->
+              <form [formGroup]="formData">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <fieldset class="mb-3">
+                      <label class="form-label">
+                        Choose Property Valuation Type:
+                      </label>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                         
+                          id="fOSRef"
+                          value="option1"
+                          checked
+                          formControlName="reference"
+                        />
+                        <label class="form-check-label" for="fOSRef">FOS Ref</label>
+                      </div>
+                    </fieldset>
+                  </div>
+  
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label class="form-label">Type of Valuation:</label>
+                      <select class="form-select" formControlName="evaluationType" >
+                        
+                        <option *ngFor="let type of valuationTypes" [ngValue]="type?.name">{{ type.name }}</option>
+                      </select>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label class="form-label">FOS Reference Number:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter FOS Reference Number"
+                        formControlName="fosReference"
+                      />
+                    </div>
+                  </div>
+                </div>
+  
+                <!-- <div class="text-end">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div> -->
+              </form>
+              <!-- End Property Valuation Form -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ********************************************************************* -->
+  
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <h5
+              class="card-title text-light mb-3"
+              style="background-color: #343a40; padding: 10px"
             >
               Facility Details
-            </h5> -->
-
-          <form>
-            <div class="mb-3 row">
-              <label for="facilityType" class="col-sm-2 form-label"
-                >Type of Facility</label
-              >
-              <div class="col-sm-10">
-                <!-- <input
-                    type="text"
-                    class="form-control"
-                    id="facilityType"
-                    placeholder="Enter type of facility"
-                  /> -->
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Enter type of facility</option>
-                  <option value="1">New</option>
-                </select>
-              </div>
+            </h5>
+            <div class="card-body">
+             
+  
+              <form [formGroup]="formData">
+                <div class="mb-3 row">
+                  <label for="facilityType" class="col-sm-2 form-label">Type of Facility</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" aria-label="Type of Facility" formControlName="facilityType">
+                      <option *ngIf="!facilityTypes" selected disabled>Loading facility types...</option>
+                      <option *ngFor="let facilityType of facilityTypes" [ngValue]="facilityType?.name">{{ facilityType.name }}</option>
+                  </select>
+                  
+                  </div>
+                </div>
+                
+  
+                <div class="mb-3 row">
+                  <label for="category" class="col-sm-2 form-label">Category</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" aria-label="Category" formControlName="category">
+                      <option *ngIf="!categories" selected disabled>Loading categories...</option>
+                      <option *ngFor="let category of categories" [ngValue]="category?.name">{{ category.name }}</option>
+                  </select>
+                  </div>
+                </div>
+                
+  
+                <div class="mb-3 row">
+                  <label for="purpose" class="col-sm-2 form-label">Purpose</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" aria-label="Purpose" formControlName="purpose">
+                      <option *ngIf="!purposes" selected disabled>Loading purposes...</option>
+                      <option *ngFor="let purpose of purposes" [ngValue]="purpose?.name">{{ purpose.name }}</option>
+                  </select>
+                  </div>
+                </div>
+                
+  
+                <div class="mb-3 row">
+                  <label for="term" class="col-sm-2 form-label">Term</label>
+                  <div class="col-sm-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="term"
+                      placeholder="Enter term"
+                      formControlName="termMonths"
+                    />
+                  </div>
+  
+                  <div class="col-sm-3 row">
+                    <select class="form-select" aria-label="Currency" formControlName="currency">
+                      <option *ngIf="!currencies" selected disabled>Loading currencies...</option>
+                      <option *ngFor="let currency of currencies" [ngValue]="currency?.name">{{ currency.name }}</option>
+                    </select>
+                  </div>
+  
+                  <div class="col-sm-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="amount"
+                      placeholder="Enter amount"
+                      formControlName="amount"
+                    />
+                  </div>
+                </div>
+  
+                <div class="form-check mb-3">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="housingLoan"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="housingLoan"
+                    style="margin-left: 12px"
+                  >
+                    Housing Loan</label
+                  >
+                </div>
+  
+  
+                
+              </form>
             </div>
-
-            <div class="mb-3 row">
-              <label for="category" class="col-sm-2 form-label">Category</label>
-              <div class="col-sm-10">
-                <!-- <input
-                    type="text"
-                    class="form-control"
-                    id="category"
-                    placeholder="Enter category"
-                  /> -->
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Enter category</option>
-                  <option value="1">New</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-3 row">
-              <label for="purpose" class="col-sm-2 form-label">Purpose</label>
-              <div class="col-sm-10">
-                <!-- <input
-                    type="text"
-                    class="form-control"
-                    id="purpose"
-                    placeholder="Enter purpose"
-                  /> -->
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Enter purpose</option>
-                  <option value="1">New</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-3 row">
-              <label for="term" class="col-sm-2 form-label">Term</label>
-              <div class="col-sm-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="term"
-                  placeholder="Enter term"
-                />
-              </div>
-
-              <div class="col-sm-3 row">
-                <!-- <input
-                    type="text"
-                    class="form-control"
-                    id="currency"
-                    placeholder="Enter currency"
-                  /> -->
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Enter currency</option>
-                  <option value="1">New</option>
-                </select>
-              </div>
-
-              <div class="col-sm-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="amount"
-                  placeholder="Enter amount"
-                />
-              </div>
-            </div>
-
-            <div class="form-check mb-3">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="housingLoan"
-              />
-              <label
-                class="form-check-label"
-                for="housingLoan"
-                style="margin-left: 12px"
-              >
-                Housing Loan</label
-              >
-            </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="text-start">
-      <button
+    </ng-container>
+
+
+
+    <ng-container *ngIf="showBorrowerForm">
+      
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <h5
+                class="card-title text-light mb-3"
+                style="background-color: #343a40; padding: 10px"
+              >
+                Borrower's Details
+              </h5>
+              <div class="card-body">
+                <form [formGroup]="formData">
+                  <div formArrayName="borrowers">
+                    <!-- Iterates over each borrower in the borrowers FormArray -->
+                    <div
+                      *ngFor="let borrower of borrowers.controls; let i = index"
+                      [formGroupName]="i"
+                    >
+                      <!-- Display title for each borrower -->
+                      <h6 class="card-title">{{ getBorrowerTitle(i) }}</h6>
+                      <!-- Form fields for customer information -->
+                      <div class="row g-3">
+                        <div class="col-md-4">
+                          <!-- Customers number -->
+                          <div class="mb-3">
+                            <label class="form-label">Customer Number</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            formControlName="customerNumber"
+                            (change)="queryCustomerByNumber(i)"
+                        />
+                        
+                          </div>
+                          <!-- Customers name -->
+                          <div class="mb-3">
+                            <label class="form-label">Customer Name</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="shortName"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <!-- Contact No -->
+                          <div class="mb-3">
+                            <label class="form-label">Contact No</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="contactNo"
+                            />
+                          </div>
+                          <!-- Email -->
+                          <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="email"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <!-- Address -->
+                          <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <textarea
+                              class="form-control"
+                              style="height: 120px"
+                              formControlName="address"
+                            ></textarea>
+                          </div>
+                          <!-- Button to remove the borrower -->
+                          <div class="mb-3">
+                            <button
+                              class="btn btn-danger"
+                              *ngIf="i > 0"
+                              (click)="removeBorrower(i)"
+                            >
+                              <i class="bi bi-basket"></i> 
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Button to add a new borrower -->
+                  <div class="text-end">
+                    <button class="btn btn-primary mt-3" (click)="addBorrower()">
+                      Add Joint Borrower
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </ng-container>
+  
+    
+    <div class="row mt-3">
+      <div class="col-md-6 text-start">
+        <!-- Adjust alignment on smaller devices -->
+        <button
+          class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
+          (click)="goToPrevious()" *ngIf="showBorrowerForm"
+        >
+          Back <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+      <div class="col-md-6 text-end">
+        <!-- Adjust alignment on smaller devices -->
+        <button *ngIf="showBorrowerForm"
         class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
-        (click)="goToPrevious()"
+        (click)="addAll()"
       >
-        Previous <i class="bi bi-arrow-left"></i>
+        Submit <i class="bi bi-arrow-right"></i>
       </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="text-end">
-      <button
-        class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
-        (click)="goToNext()"
-      >
-        Next <i class="bi bi-arrow-right"></i>
-      </button>
+        
+        <button *ngIf="!showBorrowerForm "
+          class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
+          (click)="goToNext()"
+        >
+          Next <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
     </div>
   </div>
 </section>
