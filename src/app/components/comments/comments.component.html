@@ -87,7 +87,7 @@
             <!-- <h5 class="card-title">Upload section</h5> -->
 
             <!-- General Form Elements -->
-            <form>
+            <form [formGroup]="fileForm">
               <div class="row g-5">
                 <div class="col-md-4">
                   <!-- Customers number -->
@@ -95,12 +95,13 @@
                     <div class="mb-3">
                       <label class="form-label">Document type</label>
                       <div class="col-sm-12">
-                        <select
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                          <option selected>Open this select menu</option>
-                          <option value="1">New</option>
+                        <select class="form-select" formControlName="documentType">
+                          <option value="TITLE_DEED" disabled selected>TITLE DEED</option>
+                          <option value="NATIONAL_IDENTITY_CARD">NATIONAL ID</option>
+                          <option value="BUILDING_PERMIT">BUILDING PERMIT</option>
+                          <option value="MARRIAGE_CERTIFICATE">MARRIAGE CERTIFICATE</option>
+                          <option value="QUOTATION">QUOTATION</option>
+                          <option value="LETTER_OF_INTENT">LETTER OF INTENT</option>
                         </select>
                       </div>
                     </div>
@@ -117,6 +118,8 @@
                           type="file"
                           id="imageInput"
                           class="d-none"
+                          name="file"
+                          formControlName="file"
                           (change)="onImageSelected($event)"
                         />
                         <div class="image-preview" *ngIf="!imageUrl">
@@ -150,7 +153,7 @@
                         <button
                           *ngIf="imageUrl"
                           class="btn btn-danger mt-2"
-                          (click)="clearImage()"
+                          (click)=" uploadFile()"
                         >
                           Clear Image
                         </button>
@@ -202,6 +205,8 @@
                 </div>
               </div>
             </form>
+
+            
             <!-- End General Form Elements -->
           </div>
         </div>

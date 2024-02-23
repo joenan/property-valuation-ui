@@ -13,10 +13,15 @@ export class CustomerService {
   private http = inject(HttpClient)
   constructor(private _apiService: ApiService) {}
 
+  public createPropertyValuations(payload: any): Observable<any> {
+    return this.http.post(`http://63.250.53.24:9094/property-valuations`,payload)
+   
+  }
+
+
   public createCustomer(payload: Customer): Observable<Customer> {
     return this._apiService.add<Customer>(`${this.domain}customers`, payload);
   }
-
   public retrieveCustomers(page: number, size: number): Observable<Customer[]> {
     return this._apiService.getPage<Customer[]>(
       `${this.domain}customers`,

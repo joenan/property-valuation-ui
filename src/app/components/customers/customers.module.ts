@@ -4,7 +4,6 @@ import { CustomersComponent } from "./customers.component";
 import { RouterModule, Routes } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { AddCustomerComponent } from "./add-customer/add-customer.component";
-import { CustomerService } from "./service/customer.service";
 
 export const CustomerRoutes: Routes = [
   {
@@ -19,6 +18,6 @@ export const CustomerRoutes: Routes = [
 @NgModule({
   declarations: [CustomersComponent, AddCustomerComponent],
   imports: [CommonModule, SharedModule, RouterModule.forChild(CustomerRoutes)],
-  providers: [CustomerService]
+  providers: []
 })
 export class CustomersModule {}

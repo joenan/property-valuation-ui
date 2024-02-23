@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { Facility } from "src/app/model/customer";
 import { AuthService } from "src/app/security/auth.service";
 import { CustomerService } from "src/app/services/customer.service";
 import { SettingsService } from "src/app/services/settings.service";
@@ -15,11 +16,7 @@ import { LoginResponse } from "src/app/utils/LoginResponse";
 export class InitiatorsDetailsComponent implements OnInit, OnDestroy {
   userDetailsSubscription!: Subscription;
   userDetails!: Partial<LoginResponse>;
-  customers: any[] = [
-    { customerNumber: '123', name: 'John Doe', contactNo: '1234567890', email: 'john@example.com', address: '123 Main St' },
-    { customerNumber: '456', name: 'Jane Smith', contactNo: '0987654321', email: 'jane@example.com', address: '456 Elm St' }
-    // Add more mock customer data as needed
-  ];
+
   valuationTypes: any[] = [];
   facilityTypes: any[] = [];
   categories: any[] = [];
@@ -85,10 +82,10 @@ export class InitiatorsDetailsComponent implements OnInit, OnDestroy {
   createBorrowerFormGroup(): FormGroup {
     return this.formBuilder.group({
       customerNumber: "",
-      contactNo: "",
+      phoneNumber: "",
       shortName: "",
       email: "",
-      address: "",
+      streetAddress: "",
     }); 
   }
 
@@ -204,10 +201,10 @@ export class InitiatorsDetailsComponent implements OnInit, OnDestroy {
         (customer: any) => {
           // Update the form with the retrieved customer data
           borrowerFormGroup.patchValue({
-            customerName: customer.name,
-            contactNo: customer.contactNo,
+            shortName: customer.shortName,
+            phoneNumber: customer.phoneNumber,
             email: customer.email,
-            address: customer.address
+            streetAddress: customer.streetAddress
           });
         },
         (error: any) => {
@@ -222,8 +219,36 @@ export class InitiatorsDetailsComponent implements OnInit, OnDestroy {
   
 
 
-  addAll(){
-    console.log(this.formData.value);
-    
-  }
+  saveAll(): void {
+  // Access the form data
+  const formData = this.formData.value;
+
+  // Extract the facility details from the form data
+  const facilityDetails = {
+    facilityType: formData.facilityType,
+    category: formData.category,
+
+    currency: formData.currency,
+    amount: formData.amount,
+   // Assuming 'fosReference' corresponds to 'propertyValuation'
+  };
+
+
+  // Assign facilityDetails to formData
+  formData.facilityDetails = facilityDetails;
+     
+      this.customerService.createPropertyValuations(formData).subscribe({
+        next: response => {
+          console.log('Customer added successfully:', response);
+          this.router.navigate(["/app/comments"]);
+        },
+        error: error => {
+          console.error('Error:', error);
+        },
+        complete: () => {
+          console.log('Complete: Valuation types fetched successfully.');
+        }
+      });
+    }
+  
 }

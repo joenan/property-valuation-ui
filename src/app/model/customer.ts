@@ -81,3 +81,10 @@ export interface Facility {
   borrowers: IBorrower[];
   facilityDetails: IFacilityDetails;
 }
+export interface IComment {
+  id: number;
+  date: string; // Assuming the date will be in ISO 8601 format
+  username: string;
+  commentText: string;
+  propertyValuationId: number;
+}

@@ -9,7 +9,7 @@ import { CustomerService } from 'src/app/services/customer.service';
   styleUrls: ['./add-customer.component.css']
 })
 export class AddCustomerComponent {
-  customerForm!: FormGroup;
+  customerForm:any= FormGroup;
 
   constructor(private formBuilder: FormBuilder, private customerService: CustomerService) { }
 
@@ -43,21 +43,30 @@ export class AddCustomerComponent {
 
 
   addCustomer(): void {
-    if (this.customerForm.valid) {
-      const formData = this.customerForm.value as Customer;
-      this.customerService.createCustomer(formData).subscribe({
-        next: response => {
-          console.log('Customer added successfully:', response);
-          // Reset the form after successful submission
-          this.customerForm.reset();
-        },
-        error: error => {
-          console.error('Error:', error);
-        },
-        complete: () => {
-          console.log('Complete: Valuation types fetched successfully.');
-        }
+    if (this.customerForm.invalid) {
+      // If the form is invalid, log the errors for each control
+      Object.keys(this.customerForm.controls).forEach(controlName => {
+        const control = this.customerForm.get(controlName);
+        console.log(controlName, 'errors:', control.errors);
       });
+      return; // Stop execution if the form is invalid
     }
+  
+    // If the form is valid, submit the data to the service
+    const formData = this.customerForm.value as Customer; // Assuming Customer is the interface for customer data
+    this.customerService.createCustomer(formData).subscribe({
+      next: response => {
+        console.log('Customer added successfully:', response);
+        // Reset the form after successful submission
+        this.customerForm.reset();
+      },
+      error: error => {
+        console.error('Error:', error);
+      },
+      complete: () => {
+        console.log('Complete: Customer added successfully.');
+      }
+    });
   }
+  
 }

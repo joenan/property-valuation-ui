@@ -290,7 +290,7 @@
                             <input
                               type="text"
                               class="form-control"
-                              formControlName="contactNo"
+                              formControlName="phoneNumber"
                             />
                           </div>
                           <!-- Email -->
@@ -310,7 +310,7 @@
                             <textarea
                               class="form-control"
                               style="height: 120px"
-                              formControlName="address"
+                              formControlName="streetAddress"
                             ></textarea>
                           </div>
                           <!-- Button to remove the borrower -->
@@ -356,7 +356,7 @@
         <!-- Adjust alignment on smaller devices -->
         <button *ngIf="showBorrowerForm"
         class="btn btn-outline-dark mt-3 rounded-pill px-4 py-2 fw-bold"
-        (click)="addAll()"
+        (click)="saveAll()"
       >
         Submit <i class="bi bi-arrow-right"></i>
       </button>

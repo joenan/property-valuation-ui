@@ -93,6 +93,12 @@ export class AuthService {
     console.log("############# Updating login status #################", this.isLogIn);
     this._isLogin$.next(this.isLogIn);
   }
+
+  getUserIdFromToken(): string {
+    const token = localStorage.getItem("access_token")!;
+    const decodedToken = this._jwtHelper.decodeToken(token);
+    return decodedToken.userId;
+  }
 }
 
 
