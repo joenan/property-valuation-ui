@@ -9,18 +9,20 @@ import { DOCUMENT } from '@angular/common'
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: Document, private router:Router) { }
+  user: any;
+
+  constructor(@Inject(DOCUMENT) private document: Document, private router: Router) {
+    this.user = JSON.parse(localStorage.getItem('authUser') ?? '{}');
+  }
 
   ngOnInit(): void {
   }
-  sidebarToggle()
-  {
+  sidebarToggle() {
     //toggle sidebar function
     this.document.body.classList.toggle('toggle-sidebar');
   }
 
-  logout(){
+  logout() {
     this.router.navigate(['/'])
-
   }
 }

@@ -1,33 +1,105 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ApiService } from '../shared/services/api.service';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: "root",
 })
 export class SettingsService {
-  private domain: string = environment.settingBaseurl;
 
-  constructor(private _apiService: ApiService) {}
+  private baseUrl: string = environment.settingBaseurl;
+  private http = inject(HttpClient);
 
-  public getAllValuationTypes(): Observable<any[]> {
-    return this._apiService.getAll<any[]>(`${this.domain}types`);
+  // CRUD methods for Category
+
+  createCategory(category: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}categories`, category);
   }
 
-  public getAllValuationPurpose(): Observable<any[]> {
-    return this._apiService.getAll<any[]>(`${this.domain}purposes`);
+  getCategoryById(categoryId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}categories/${categoryId}`);
   }
 
-  public getAllFacilities(): Observable<any[]> {
-    return this._apiService.getAll<any[]>(`${this.domain}facilities`);
+  deleteCategory(categoryId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}categories/${categoryId}`);
   }
 
-  public getAllCurrencies(): Observable<any[]> {
-    return this._apiService.getAll<any[]>(`${this.domain}currencies`);
+  getAllCategories(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}categories`);
   }
 
-  public getAllCategories(): Observable<any[]> {
-    return this._apiService.getAll<any[]>(`${this.domain}categories`);
+  // CRUD methods for Currency
+
+  createCurrency(currency: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}currencies`, currency);
   }
+
+  getCurrencyById(currencyId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}currencies/${currencyId}`);
+  }
+
+  deleteCurrency(currencyId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}currencies/${currencyId}`);
+  }
+
+  getAllCurrencies(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}currencies`);
+  }
+
+  // CRUD methods for Facility
+
+  createFacility(facility: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}facilities`, facility);
+  }
+
+  getFacilityById(facilityId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}facilities/${facilityId}`);
+  }
+
+  deleteFacility(facilityId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}facilities/${facilityId}`);
+  }
+
+  getAllFacilities(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}facilities`);
+  }
+
+  // CRUD methods for Purpose
+
+  createPurpose(purpose: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}purposes`, purpose);
+  }
+
+  getPurposeById(purposeId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}purposes/${purposeId}`);
+  }
+
+  deletePurpose(purposeId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}purposes/${purposeId}`);
+  }
+
+  getAllPurposes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}purposes`);
+  }
+
+  // CRUD methods for Valuation Type
+
+  createValuationType(valuationType: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}types`, valuationType);
+  }
+
+  getValuationTypeById(valuationTypeId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}types/${valuationTypeId}`);
+  }
+
+  deleteValuationType(valuationTypeId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}types/${valuationTypeId}`);
+  }
+
+  getAllValuationTypes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}types`);
+  }
+
+
 }

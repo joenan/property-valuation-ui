@@ -1,4 +1,9 @@
 .form-label{
     font-weight: 600;
-    
 }
+
+/* Add this style to reduce the font-size of all table data */
+table.table td {
+    font-size: 13px; /* Adjust the font-size as needed */
+  }
+  

@@ -5,6 +5,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { HeaderComponent } from "./header/header.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { HomeComponent } from "./home/home.component";
+import { AuthGuard } from "../security/auth.guard";
 
 export const layoutRoutes: Routes = [
   {
@@ -17,6 +18,7 @@ export const layoutRoutes: Routes = [
           import("../components/dashboard/dashboard.module").then(
             (m) => m.DashboardModule
           ),
+          canActivate: [AuthGuard],
       },
       {
         path: "customers",
@@ -24,6 +26,7 @@ export const layoutRoutes: Routes = [
           import("../components/customers/customers.module").then(
             (m) => m.CustomersModule
           ),
+          canActivate: [AuthGuard],
       },
       {
         path: "initiators-details",
@@ -31,28 +34,19 @@ export const layoutRoutes: Routes = [
           import(
             "../components/initiators-details/initiators-details.module"
           ).then((m) => m.InitiatorsDetailsModule),
-      },
+          canActivate: [AuthGuard],
 
-      // {
-      //   path: "facility-details",
-      //   loadChildren: () =>
-      //     import("../components/facility-details/facility-details.module").then(
-      //       (m) => m.FacilityDetailsModule
-      //     ),
-      // },
-      // {
-      //   path: 'property-valuation',
-      //   loadChildren: () =>
-      //     import('../components/property-valuation/property-valuation.module').then(
-      //       (m) => m.PropertyValuationModule
-      //     ),
-      // },
+      },
+    
+  
       {
         path: "borrowers-details",
         loadChildren: () =>
           import(
             "../components/borrowers-details/borrowers-details.module"
           ).then((m) => m.BorrowersDetailsModule),
+          canActivate: [AuthGuard],
+
       },
       {
         path: "comments",
@@ -60,6 +54,8 @@ export const layoutRoutes: Routes = [
           import("../components/comments/comments.module").then(
             (m) => m.CommentsModule
           ),
+          canActivate: [AuthGuard],
+
       },
       // {
       //   path: "upload-section",
@@ -74,6 +70,8 @@ export const layoutRoutes: Routes = [
           import(
             "../components/pvc-validation-requests/pvc-validation-requests.module"
           ).then((m) => m.PvcValidationRequestsModule),
+          canActivate: [AuthGuard],
+
       },
     ],
   },

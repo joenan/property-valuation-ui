@@ -1,59 +1,102 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from "ngx-toastr";
 import { Subscription } from "rxjs";
-import { AuthService } from "src/app/security/auth.service";
+import { AppService } from "src/app/services/app.service";
 import { CommentsService } from "src/app/services/comments.service";
-import { LoginResponse } from "src/app/utils/LoginResponse";
+import { FileUploadService } from "src/app/services/fileupload.service";
+
+
+interface Comment {
+  date: Date;
+  username: string;
+  commentText: string;
+  propertyValuationId: number;
+}
 
 @Component({
   selector: "app-comments",
   templateUrl: "./comments.component.html",
   styleUrls: ["./comments.component.css"],
 })
+
+
 export class CommentsComponent {
 
   userDetails!: any
   userDetailsSubscription!: Subscription;
   imageUrl: string | ArrayBuffer | null = null;
-  documents: any[] = [
-    {
-      docType: "Type 1",
-      filename: "File1.pdf",
-      size: "2MB",
-      uploadedBy: "User1",
-      uploadedOn: "2024-02-17",
-    },
-    {
-      docType: "Type 2",
-      filename: "File2.docx",
-      size: "1.5MB",
-      uploadedBy: "User2",
-      uploadedOn: "2024-02-18",
-    },
-    // Add more documents as needed
-  ];
- 
-    commentForm: any=FormGroup;
-    fileForm: any=FormGroup;
 
-    constructor( private router: Router,private formBuilder:FormBuilder, private authService: AuthService, private fb: FormBuilder, private commentService: CommentsService) {
-      this.commentForm = this.fb.group({
-        username: ['', Validators.required],
-        commentText: ['', Validators.required],
-        propertyValuationId: [0, Validators.required] // Set default value or retrieve it from somewhere
-      });
+  documents: any[] = [];
 
-      this.fileForm = this.fb.group({
-        documentType: [''], // Add default value or validators if needed
-        file: ['']
-      });
-      this.userDetailsSubscription = this.authService.getUserDetails().subscribe(userDetails => {
-        this.userDetails = userDetails;
-       
-      });
-  
-    }
+  commentForm: any = FormGroup;
+  fileForm: any = FormGroup;
+  comments: Comment[] = [];
+  uploadedFiles: any = [];
+  user: any;
+  fileToBeUploaded: any | null = null;
+  propertyValuationId: any;
+  commentText: any;
+
+  constructor(private router: Router,
+    private formBuilder: FormBuilder,
+    private appService: AppService,
+    private fb: FormBuilder,
+    private fileUploadService: FileUploadService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
+    private commentService: CommentsService) {
+
+    this.user = JSON.parse(localStorage.getItem('authUser') ?? '{}');
+    this.propertyValuationId = localStorage.getItem('propertyValuationId') || '';
+
+
+    this.commentForm = this.fb.group({
+      username: ['', Validators.required],
+      commentText: ['', Validators.required],
+      propertyValuationId: [0, Validators.required]
+    });
+
+    this.fileForm = this.fb.group({
+      documentType: [''],
+      file: ['']
+    });
+
+    this.getComments();
+    this.getFileUploads();
+
+  }
+
+  getComments() {
+    this.commentService.getCommentsByPropertyId(this.propertyValuationId).subscribe({
+      next: (res) => {
+        this.comments = res;
+      },
+      error: (err) => {
+        // Handle errors
+      },
+      complete: () => {
+        // Handle completion if needed
+      },
+    });
+  }
+
+  getFileUploads() {
+    this.fileUploadService.getFilesByPropertyId(this.propertyValuationId).subscribe({
+      next: (res) => {
+        this.uploadedFiles = res;
+      },
+      error: (err) => {
+        // Handle errors
+      },
+      complete: () => {
+        // Handle completion if needed
+      },
+    });
+  }
+
   goToNext() {
     // this.router.navigate(["dashboard/initiators-details"]);
     this.router.navigate(["/app/pvc-validation-requests"]);
@@ -64,18 +107,22 @@ export class CommentsComponent {
   }
 
   onImageSelected(event: any): void {
+    console.log('Image selected event:', event);
     const file = event.target.files[0];
     if (file) {
-      this.loadImage(file);
+      this.fileToBeUploaded = file;
+      this.loadImage();
     }
   }
 
-  loadImage(file: File): void {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imageUrl = reader.result;
-    };
-    reader.readAsDataURL(file);
+  loadImage() {
+    if (this.fileToBeUploaded) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageUrl = reader.result;
+      };
+      reader.readAsDataURL(this.fileToBeUploaded);
+    }
   }
 
   onDragOver(event: DragEvent): void {
@@ -84,9 +131,9 @@ export class CommentsComponent {
 
   onDrop(event: DragEvent): void {
     event.preventDefault();
-    const file = event.dataTransfer?.files[0]; // Using optional chaining to handle null case
+    const file = event.dataTransfer?.files[0];
     if (file) {
-      this.loadImage(file);
+      this.loadImage();
     }
   }
 
@@ -97,10 +144,10 @@ export class CommentsComponent {
   onSubmit(): void {
     if (this.commentForm.valid) {
       const commentData = this.commentForm.value;
-      this.commentService.createComment(commentData).subscribe({
+      this.commentService.createComments(commentData).subscribe({
         next: (comment) => {
           console.log('Comment posted successfully:', comment);
-          // Optionally, you can reset the form after successful submission
+
           this.commentForm.reset();
         },
         error: (error) => {
@@ -115,35 +162,108 @@ export class CommentsComponent {
       console.error('Form is invalid.');
       return;
     }
-  
+
     const documentType = this.fileForm.get('documentType')?.value;
-    const userId = this.userDetails?.id || '';
-    const propertyValuationId = '1234'; // Replace with actual property valuation ID
-  
-    const fileInput = this.fileForm.get('file');
-    console.log(fileInput,'log this');
-    
-    if (!(fileInput?.value instanceof FileList)) {
-      console.error('File input is missing.');
-      return;
-    }
-  
-    const file = fileInput.value[0];
-    const formData = new FormData();
-    formData.append('file', file, file.name);
+    const userId = this.user.id || '';
+
+
+    const formData: any = new FormData();
+
+    formData.append('file', this.fileToBeUploaded, this.fileToBeUploaded.name);
     formData.append('documentType', documentType);
     formData.append('userId', userId);
-    formData.append('propertyValuationId', propertyValuationId);
-  
-    this.commentService.uploadFile(formData).subscribe({
+    formData.append('propertyValuationId', this.propertyValuationId);
+
+    for (const entry of formData.entries()) {
+      const [key, value] = entry;
+      console.log(`${key}: ${value}`);
+    }
+
+    this.spinner.show();
+
+    this.fileUploadService.uploadFile(formData).subscribe({
       next: (response) => {
-        console.log('File uploaded successfully:', response);
+        this.getComments();
+        this.getFileUploads();
+        this.spinner.hide();
+        this.toastr.success('File uploaded successfully!', 'Success', {
+          timeOut: 2000
+        });
       },
       error: (error) => {
-        console.error('Error uploading file:', error);
+        this.getComments();
+        this.getFileUploads();
+        this.spinner.hide();
+        this.toastr.error(error.error.message);
       },
     });
   }
-  
-  
+
+  downloadFile(file: any) {
+    this.spinner.show();
+    this.fileUploadService.downloadFile(file.id).subscribe({
+      next: (blob) => {
+        this.spinner.hide();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = file.fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      },
+      error: (error) => {
+        this.spinner.hide();
+        this.toastr.error(error.error.message);
+      }
+    });
+  }
+
+  deleteFile(file: any) {
+    this.spinner.show();
+    this.fileUploadService.deleteFiles(file.id).subscribe({
+      next: (response) => {
+        this.getFileUploads();
+        this.spinner.hide();
+        this.toastr.success('File was deleted successfully');
+      },
+
+      error: (error) => {
+        this.spinner.hide();
+        this.toastr.error(error.error.message)
+      }
+
+    });
+  }
+
+  addComments() {
+    if (this.commentText === null || this.commentText === '') {
+      return;
+    }
+
+    this.spinner.show();
+
+    let commentObject: any = {
+      date: new Date(),
+      username: this.user.username,
+      commentText: this.commentText,
+      propertyValuationId: this.propertyValuationId
+    };
+
+    this.commentService.createComments(commentObject).subscribe({
+
+      next: () => {
+        this.getComments();
+        this.spinner.hide();
+        this.toastr.success('comments were added successfully');
+      },
+
+      error: (error) => {
+        this.spinner.hide();
+        this.toastr.error(error.error.message)
+      }
+
+    });
+  }
+
 }

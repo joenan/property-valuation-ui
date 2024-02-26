@@ -1,11 +1,7 @@
-import { NavigationEnd, NavigationError, NavigationStart, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../auth.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { Store } from "@ngrx/store";
-import { selectIsAuthenticated, startLogin } from "src/app/store";
-
-
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: "app-sign-in",
@@ -13,13 +9,12 @@ import { selectIsAuthenticated, startLogin } from "src/app/store";
   styleUrls: ["./sign-in.component.css"],
 })
 export class SignInComponent implements OnInit {
-  loginForm: any = FormGroup;
+  loginForm: FormGroup;  
 
   constructor(
     private _router: Router,
-    private _authService: AuthService,
     private _fb: FormBuilder,
-    private _store: Store
+    private authService: AuthService
   ) {
     this.loginForm = this._fb.group({
       username: [""],
@@ -29,19 +24,22 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._store.select(selectIsAuthenticated).subscribe((success) => {
-             if (success) {
-               this._router.navigate(["/app/dashboard"]);
-             }
-    });
+    // You can perform any initialization logic here
   }
 
-  login() {
-
-      const credential = {
-        password: this.loginForm.value.password,
-        username: this.loginForm.value.username,
-      };
-      this._store.dispatch(startLogin({ credential }));
+  submit() {
+    this.authService.login(this.loginForm.value).subscribe(
+      (res) => {
+        // Handle successful login response
+        console.log("Login successful:", res);
+        // Redirect or perform any action after successful login
+        this._router.navigateByUrl('/app/dashboard');
+      },
+      (error) => {
+        // Handle login error
+        console.error("Login error:", error);
+        // Optionally display an error message to the user
+      }
+    );
   }
 }

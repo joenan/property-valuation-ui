@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ApiService } from './services/api.service';
+ 
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { ApiService } from './services/api.service';
 
   providers: [
     // { provide: MatDialogRef, useValue: {} },
-    ApiService,
+ 
   ],
 })
 export class SharedModule {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CommentsComponent } from './comments.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const CommentRoutes: Routes = [
   {
@@ -18,6 +19,7 @@ export const CommentRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    NgxSpinnerModule,
     RouterModule.forChild(CommentRoutes)
   ]
 })

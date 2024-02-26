@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Customer } from 'src/app/model/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 
@@ -11,15 +12,17 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class AddCustomerComponent {
   customerForm:any= FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private customerService: CustomerService) { }
+  customers: Customer[] = [];
+
+  constructor(private formBuilder: FormBuilder, private customerService: CustomerService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.customerForm = this.formBuilder.group({
-      customerNumber: [""],
-      shortName: [""],
+      customerNumber: [{ value: '', disabled: true }],
+      shortName: ["", [Validators.required, Validators.maxLength(50)]],
       Individual: [false],
-      nationality: [""],
-      nationalityNumber: [""],
+      nationality: ["", [Validators.required, Validators.maxLength(50)]],
+      nationalityNumber: ["", [Validators.required, Validators.pattern(/^\d+$/), Validators.maxLength(14)]],
       nationalityDescription: [""],
       streetAddress: [""],
       addressLine2: [""],
@@ -37,36 +40,39 @@ export class AddCustomerComponent {
       mobileOperatorISO: [""],
       mobileOperatorCode: [""],
       smsNumber: [""],
-      email: [""],
+      email: ["", [Validators.required, Validators.email]],
     });
   }
 
 
   addCustomer(): void {
     if (this.customerForm.invalid) {
-      // If the form is invalid, log the errors for each control
+       
       Object.keys(this.customerForm.controls).forEach(controlName => {
         const control = this.customerForm.get(controlName);
-        console.log(controlName, 'errors:', control.errors);
+        
       });
-      return; // Stop execution if the form is invalid
+      return;  
     }
   
-    // If the form is valid, submit the data to the service
+     
     const formData = this.customerForm.value as Customer; // Assuming Customer is the interface for customer data
     this.customerService.createCustomer(formData).subscribe({
       next: response => {
         console.log('Customer added successfully:', response);
-        // Reset the form after successful submission
+        this.toastr.success('Customer has been saved successfully!', 'Success', {
+          timeOut: 2000
+        });
         this.customerForm.reset();
       },
       error: error => {
-        console.error('Error:', error);
+        this.toastr.error(error);
       },
       complete: () => {
         console.log('Complete: Customer added successfully.');
       }
     });
   }
+
   
 }

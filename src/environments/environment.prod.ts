@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  authBaseurl: "http://63.250.53.24:9091/",
-  propertyUrl: "http://63.250.53.24:9094/"}
+  authBaseurl: "http://localhost:9091/",
+  propertyUrl: "http://localhost:9094/"}

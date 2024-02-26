@@ -9,22 +9,22 @@ import { CustomerService } from "src/app/services/customer.service";
   styleUrls: ["./customers.component.css"],
 })
 export class CustomersComponent implements OnInit {
+
+  customers: Customer[] = [];
+  
   constructor(private router: Router, private customerService:CustomerService) {}
   goToNext() {
     // this.router.navigate(["dashboard/initiators-details"]);
     this.router.navigate(["/app/initiators-details"]);
   }
 
-  customers: Customer[] = [
-
-  ];
   ngOnInit() {
 
     this.fetchCustomers()
   }
 
   fetchCustomers() {
-    this.customerService.retrieveCustomers(0,10).subscribe({
+    this.customerService.getAllCustomers().subscribe({
       next: response => {
         this.customers = response;
         console.log('Next:', response);
