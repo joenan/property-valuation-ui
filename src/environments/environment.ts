@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
-  appUrl: "http://localhost:9094/",
-  baseUrl: "http://localhost:9090/",
-  uploadUrl: "http://localhost:9095/",
-  authBaseurl: "http://localhost:9091/",
-  settingBaseurl: "http://localhost:9093/",
-  propertyUrl: "http://localhost:9094/",
-  reportUrl: "http://localhost:9092/",
+  appUrl: "http://63.250.53.24:9094/",
+  baseUrl: "http://63.250.53.24:9090/",
+  uploadUrl: "http://63.250.53.24:9095/",
+  authBaseurl: "http://63.250.53.24:9091/",
+  settingBaseurl: "http://63.250.53.24:9093/",
+  propertyUrl: "http://63.250.53.24:9094/",
+  reportUrl: "http://63.250.53.24:9092/",
 };
 
 /*
