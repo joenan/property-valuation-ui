@@ -6,6 +6,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
 import { AuthService } from "./auth.service";
 import { SharedModule } from "../shared/shared.module";
+import { NgxSpinner, NgxSpinnerModule } from "ngx-spinner";
+import { ToastrModule } from "ngx-toastr";
 
 export const securityRoutes: Routes = [
   {
@@ -27,6 +29,8 @@ export const securityRoutes: Routes = [
   ],
   imports: [
     SharedModule,
+    NgxSpinnerModule,
+    ToastrModule,
     RouterModule.forChild(securityRoutes),
   ],
   providers: [AuthService],
