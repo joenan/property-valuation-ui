@@ -107,13 +107,33 @@ export class CommentsComponent {
   }
 
   onImageSelected(event: any): void {
-    console.log('Image selected event:', event);
+
+    const allowedFileTypes = ["pdf", "doc", "docx", "jpg", "png"];
+    const maxFileSizeMB = 3;
+  
     const file = event.target.files[0];
+  
     if (file) {
+      // Check file type
+      const fileType = file.name.split('.').pop()?.toLowerCase();
+      if (!allowedFileTypes.includes(fileType)) {
+        this.toastr.error('Are the allowed types', allowedFileTypes.join(', '));
+        return;
+      }
+  
+      // Check file size
+      const fileSizeMB = file.size / (1024 * 1024);
+      if (fileSizeMB > maxFileSizeMB) {
+        this.toastr.error('File size exceeds the limit (3MB).');
+        return;
+      }
+  
+      // Proceed with file upload
       this.fileToBeUploaded = file;
       this.loadImage();
     }
   }
+  
 
   loadImage() {
     if (this.fileToBeUploaded) {

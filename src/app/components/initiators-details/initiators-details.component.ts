@@ -51,7 +51,7 @@ export class InitiatorsDetailsComponent implements OnInit, OnDestroy {
   createFormData() {
 
     this.formData = this.formBuilder.group({
-      facilityType: ['ON_REVOLVING', Validators.required],
+      facilityType: ['NON_REVOLVING', Validators.required],
       category: ['PBWM_HOUSING', Validators.required],
       purpose: ['CONSTRUCTION', Validators.required],
       termMonths: ['', Validators.required],
